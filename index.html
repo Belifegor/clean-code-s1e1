@@ -12,13 +12,13 @@
   </div>
 
   <div class="centered-element">
-    <p id="topSectionForAddingElementToList">
+    <div id="topSectionForAddingElementToList">
       <label for="new-task">Add Item</label>
       <div class="task-wrapper">
         <input id="new-task" class="task" type="text">
         <button>Add</button>
       </div>
-    </p>
+    </div>
 
     <h3>Todo</h3>
     <ul class="task-list" id="incompleteTasks">
@@ -35,7 +35,7 @@
       <li class="task-item edit-mode">
         <input type="checkbox">
         <label class="task">Go Shopping</label>
-        <input type="text" value="Go Shopping" class="task">
+        <input type="text" value="Go Shopping" class="task-item-input">
         <button class="edit">Save</button>
         <button class="delete">
           <img src="./remove.svg">
@@ -44,7 +44,7 @@
     </ul>
 
     <h3>Completed</h3>
-    <ul id="completed-tasks" class="completed-tasks">
+    <ul id="completed-tasks">
       <li class="task-item">
         <input type="checkbox" checked>
         <label class="completed-tasks-label">See the Doctor</label>
