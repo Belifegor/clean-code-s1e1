@@ -67,27 +67,40 @@ const addTask = () => {
 
 const editTask = function () {
     console.log("Edit Task...");
-    console.log("Change 'edit' to 'save'");
 
     const listItem = this.parentNode;
     const editInput = listItem.querySelector('.task-item-input');
-    const label= listItem.querySelector(".task");
+    const label = listItem.querySelector("label");
     const editButton = listItem.querySelector(".edit");
+    const checkbox = listItem.querySelector("input[type='checkbox']");
     const isEditMode = listItem.classList.contains("edit-mode");
-    
+
+    const wasCompleted = label.classList.contains("completed-tasks-label");
+
     if (isEditMode) {
-        label.innerText = editInput.value.trim();
-        editInput.style.display = "none";
-        label.style.display = "block";
-        editButton.innerText = "Edit";
-      } else {
-        alert("Task name cannot be empty!");
-      } else {
+        if (editInput.value.trim()) {
+            label.innerText = editInput.value.trim();
+            editInput.style.display = "none";
+            label.style.display = "block";
+            editButton.innerText = "Edit";
+            listItem.classList.remove("edit-mode");
+
+            if (wasCompleted) {
+                label.classList.add("completed-tasks-label");
+            }
+        } else {
+            alert("Task name cannot be empty!");
+        }
+    } else {
         editInput.value = label.innerText;
-        editInput.style.display = "block"; // Показываем поле ввода
-        label.style.display = "none"; // Скрываем текст задачи
+        editInput.style.display = "block";
+        label.style.display = "none";
         editButton.innerText = "Save";
         listItem.classList.add("edit-mode");
+
+        if (wasCompleted) {
+            label.classList.add("completed-tasks-label");
+        }
     }
 };
 
@@ -98,7 +111,7 @@ const deleteTask = function () {
 
     const listItem = this.parentNode;
     const ul = listItem.parentNode;
-    ul.removeChild(listItem);//Remove the parent list item from the ul.
+    ul.removeChild(listItem);
 };
 
 
@@ -108,7 +121,7 @@ const taskCompleted = function () {
     const listItem = this.parentNode;
     const label = listItem.querySelector(".task");
 
-    if (label) label.classList.add("completed-tasks-label"); // Добавляем стиль
+    if (label) label.classList.add("completed-tasks-label"); 
     completedTasksHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskIncomplete);
 };
@@ -122,7 +135,7 @@ const taskIncomplete = function () {
     const listItem = this.parentNode;
     const label = listItem.querySelector(".task");
     
-    if (label) label.classList.remove("completed-tasks-label"); // Удаляем стиль
+    if (label) label.classList.remove("completed-tasks-label"); 
     incompleteTaskHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskCompleted);
 };
