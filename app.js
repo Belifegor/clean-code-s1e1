@@ -30,6 +30,7 @@ const createNewTaskElement = (taskString) => {
     const editInput=document.createElement("input");
     editInput.type = "text";
     editInput.className = "task-item-input";
+    editInput.style.display = "none";
 
     //button.edit
     const editButton=document.createElement("button");
@@ -76,12 +77,18 @@ const editTask = function () {
     
     if (isEditMode) {
         label.innerText = editInput.value.trim();
+        editInput.style.display = "none";
+        label.style.display = "block";
         editButton.innerText = "Edit";
       } else {
-        editInput.value = label.innerText; 
+        alert("Task name cannot be empty!");
+      } else {
+        editInput.value = label.innerText;
+        editInput.style.display = "block"; // Показываем поле ввода
+        label.style.display = "none"; // Скрываем текст задачи
         editButton.innerText = "Save";
-      }
-      listItem.classList.toggle("edit-mode");
+        listItem.classList.add("edit-mode");
+    }
 };
 
 
